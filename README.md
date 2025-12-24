@@ -27,3 +27,4 @@ The framework is CI-ready and follows real-world industry practices.
 ![Node.js](https://img.shields.io/badge/Node.js-18%2B-brightgreen)
 
 This project contains API automation tests built using Playwright and TypeScript
+I have added this line
