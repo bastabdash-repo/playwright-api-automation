@@ -26,4 +26,4 @@ The framework is CI-ready and follows real-world industry practices.
 ![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue)
 ![Node.js](https://img.shields.io/badge/Node.js-18%2B-brightgreen)
 
-This project contains API automation tests built using Playwright and TypeScript.
+This project contains API automation tests built using Playwright and TypeScript
