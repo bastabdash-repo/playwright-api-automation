@@ -7,8 +7,8 @@ export async function generateToken(request: APIRequestContext): Promise<string>
     const credential =
     {
 
-        username: "admin",
-        password: "password123"
+        username: process.env.API_USERNAME!,
+        password: process.env.API_PASSWORD!,
 
 
     }
