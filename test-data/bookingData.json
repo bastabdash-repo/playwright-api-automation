@@ -1,0 +1,29 @@
+{
+  "createBooking": {
+    "firstname": "Jim",
+    "lastname": "Brown",
+    "totalprice": 111,
+    "depositpaid": true,
+    "bookingdates": {
+      "checkin": "2025-12-30",
+      "checkout": "2026-01-01"
+    },
+    "additionalneeds": "Breakfast"
+  },
+
+  "updateBooking": {
+    "firstname": "Bastab",
+    "lastname": "Dash",
+    "totalprice": 111,
+    "depositpaid": true,
+    "bookingdates": {
+      "checkin": "2025-12-30",
+      "checkout": "2026-01-01"
+    },
+    "additionalneeds": "Breakfast"
+  },
+
+  "partialUpdate": {
+    "additionalneeds": "Dinner"
+  }
+}

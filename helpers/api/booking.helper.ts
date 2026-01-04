@@ -1,25 +1,22 @@
 import { APIRequestContext, expect } from "@playwright/test";
+import fs from "fs";
+import path from "path";
 
+// 🔹 Load test data once
+const bookingData = JSON.parse(
+  fs.readFileSync(
+    path.join(process.cwd(), "test-data", "bookingData.json"),
+    "utf-8"
+  )
+);
 
-//* ----------  Create (POST) ---------- */
-
+/* ---------- CREATE (POST) ---------- */
 export async function createBooking(request: APIRequestContext) {
-  const bookingDetails = {
-    firstname: "Jim",
-    lastname: "Brown",
-    totalprice: 111,
-    depositpaid: true,
-    bookingdates: {
-      checkin: "2025-12-30",
-      checkout: "2026-01-01",
-    },
-    additionalneeds: "Breakfast",
-  };
-
-  const response = await request.post("https://restful-booker.herokuapp.com/booking",
+  const response = await request.post(
+    "https://restful-booker.herokuapp.com/booking",
     {
       headers: { "Content-Type": "application/json" },
-      data: bookingDetails,
+      data: bookingData.createBooking
     }
   );
 
@@ -27,43 +24,29 @@ export async function createBooking(request: APIRequestContext) {
   return response.json();
 }
 
-/* ----------  UPDATE (PUT) ---------- */
-
-export async function updateBooking(request: APIRequestContext, bookingId: number, token: string) {
-
-
-  const updatebookingDetails = {
-    firstname: "Bastab",
-    lastname: "Dash",
-    totalprice: 111,
-    depositpaid: true,
-    bookingdates: {
-      checkin: "2025-12-30",
-      checkout: "2026-01-01",
-    },
-    additionalneeds: "Breakfast",
-  };
-
-  const response = await request.put(`https://restful-booker.herokuapp.com/booking/${bookingId}`,
+/* ---------- UPDATE (PUT) ---------- */
+export async function updateBooking(
+  request: APIRequestContext,
+  bookingId: number,
+  token: string
+) {
+  const response = await request.put(
+    `https://restful-booker.herokuapp.com/booking/${bookingId}`,
     {
-
-      headers:
-      {
-
+      headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json",
+        Accept: "application/json",
         Cookie: `token=${token}`
-
-      }, data: updatebookingDetails,
+      },
+      data: bookingData.updateBooking
     }
-  )
+  );
+
   expect(response.status()).toBe(200);
   return response.json();
-
 }
 
 /* ---------- PARTIAL UPDATE (PATCH) ---------- */
-
 export async function partialUpdate(
   request: APIRequestContext,
   bookingId: number,
@@ -74,11 +57,9 @@ export async function partialUpdate(
     {
       headers: {
         "Content-Type": "application/json",
-        Cookie: `token=${token}`,
+        Cookie: `token=${token}`
       },
-      data: {
-        additionalneeds: "Dinner",
-      },
+      data: bookingData.partialUpdate
     }
   );
 
@@ -86,17 +67,21 @@ export async function partialUpdate(
   return response.json();
 }
 
-
-/* ----------  DELETE (delete) ---------- */
-export async function deleteBooking(request: APIRequestContext, bookingId: number, token: string) {
-  const response = await request.delete(`https://restful-booker.herokuapp.com/booking/${bookingId}`,
+/* ---------- DELETE ---------- */
+export async function deleteBooking(
+  request: APIRequestContext,
+  bookingId: number,
+  token: string
+) {
+  const response = await request.delete(
+    `https://restful-booker.herokuapp.com/booking/${bookingId}`,
     {
       headers: {
         "Content-Type": "application/json",
-        Cookie: `token=${token}`,
-      },
+        Cookie: `token=${token}`
+      }
     }
-  )
+  );
 
   expect(response.status()).toBe(201);
 }
